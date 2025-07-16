@@ -2,7 +2,7 @@ import numpy as np
 
 
 def multiscale_sample_entropy(time_series, max_scale=10, m=2, r=0.2):
-    # -------- Coarse-graining  --------
+    # Coarse-graining
     def coarse_grain(series, scale):
         N = len(series)
         num_segments = N // scale
@@ -11,7 +11,7 @@ def multiscale_sample_entropy(time_series, max_scale=10, m=2, r=0.2):
             for i in range(num_segments)
         ])
 
-    # -------- sample_entropy --------
+    # sample_entropy
     def sample_entropy(series, m, r):
         N = len(series)
         r *= np.std(series)
@@ -26,7 +26,7 @@ def multiscale_sample_entropy(time_series, max_scale=10, m=2, r=0.2):
         except:
             return np.nan
 
-    # -------- Calculating multi-scale sample entropy --------
+    # Calculating multi-scale sample entropy
     mse = []
     for scale in range(1, max_scale + 1):
         y = coarse_grain(time_series, scale)
